@@ -11,7 +11,7 @@
 from mpmath import *
 from tkinter import *
 import tkinter.messagebox
-from tkinter.ttk import Frame, Label, Entry
+from tkinter.ttk import Frame, Label, Entry , Button , Style
 
 mp.dps = 50000; mp.pretty = True
 
@@ -33,42 +33,42 @@ class GFer(Frame):
         global res
         res = StringVar()
 
-        frame1 = Frame(self)
+        frame1 = Frame(self,style='My.TFrame')
         frame1.pack(fill=X)
 
-        lbl1 = Label(frame1, text="Enter the base :", width=16)
+        lbl1 = Label(frame1, text="Enter the base :", width=16,background='orange')
         lbl1.pack(side=LEFT, padx=5, pady=5)
 
-        entry1 = Entry(frame1,textvariable=base)
+        entry1 = Entry(frame1,textvariable=base,style='My.TEntry')
         entry1.pack(fill=X, padx=5, expand=True)
 		
-        frame2 = Frame(self)
+        frame2 = Frame(self,style='My.TFrame')
         frame2.pack(fill=X)
 
-        lbl2 = Label(frame2, text="Enter the exponent :", width=16)
+        lbl2 = Label(frame2, text="Enter the exponent :", width=16,background='orange')
         lbl2.pack(side=LEFT, padx=5, pady=5)
 
-        entry2 = Entry(frame2,textvariable=exp)
+        entry2 = Entry(frame2,textvariable=exp,style='My.TEntry')
         entry2.pack(fill=X, padx=5, expand=True)
 
         
-        frame3 = Frame(self)
+        frame3 = Frame(self,style='My.TFrame')
         frame3.pack(fill=X)
 
-        result = Label(frame3, textvariable=res, width=22)
+        result = Label(frame3, textvariable=res, width=22,background='orange')
         result.pack(side=LEFT, padx=70, pady=5)
 
 		
-        frame4 = Frame(self)
+        frame4 = Frame(self,style='My.TFrame')
         frame4.pack(fill=X)
 
-        btntest = Button(frame4, text="Test", width=8, command=self.test)
+        btntest = Button(frame4, text="Test", width=10, command=self.test,style='My.TButton')
         btntest.pack(side=LEFT, anchor=N, padx=5, pady=5)
 		
-        btnclear = Button(frame4, text="Clear", width=8, command=self.clear)
+        btnclear = Button(frame4, text="Clear", width=10, command=self.clear,style='My.TButton')
         btnclear.pack(side=LEFT, anchor=N, padx=5, pady=5)
 		
-        btnclose = Button(frame4, text="Close", width=8, command=self.quit)
+        btnclose = Button(frame4, text="Close", width=10, command=self.quit,style='My.TButton')
         btnclose.pack(side=LEFT, anchor=N, padx=5, pady=5)
 
     def errorMsg(self,msg):
@@ -148,7 +148,11 @@ class GFer(Frame):
 
 def main():
     root = Tk()
-    root.geometry("300x130")
+    s = Style()
+    s.configure('My.TFrame', background='orange')
+    s.configure('My.TButton', background='light gray')
+    s.configure('My.TEntry', fieldbackground='light gray')
+    root.geometry("300x112")
     gfer = GFer(root)
     root.mainloop()
 
